@@ -3,7 +3,7 @@ import { TaskListContext } from '../contexts/TaskListContext'
 
 const Task = ({ task }) => {
   const { removeTask } = useContext(TaskListContext)
-  const uri = `https://wa.me/${task.phone}`
+  const uri = `https://wa.me/62${task.phone}`
   return (
     <li className="list-item">
       <span>{task.phone} </span>
