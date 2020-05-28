@@ -2,10 +2,11 @@ import React, { useContext } from 'react'
 import { TaskListContext } from '../contexts/TaskListContext'
 
 const Task = ({ task }) => {
-  const { removeTask, findItem } = useContext(TaskListContext)
+  const { removeTask } = useContext(TaskListContext)
+  const uri = `https://wa.me/${task.phone}`
   return (
     <li className="list-item">
-      <span>{task.title} </span>
+      <span>{task.phone} </span>
       <div>
         <button
           className="btn-delete task-btn"
@@ -13,8 +14,8 @@ const Task = ({ task }) => {
         >
           <i className="fas fa-trash-alt"></i>
         </button>{' '}
-        <button className="btn-edit task-btn" onClick={() => findItem(task.id)}>
-          <i className="fas fa-pen"></i>
+        <button className="btn-edit task-btn">
+          <a style={{ display: "table-cell" }} href={uri} target="_blank"><i className="fa fa-whatsapp"></i></a>
         </button>
       </div>
     </li>

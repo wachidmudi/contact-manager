@@ -2,29 +2,34 @@ import React, { useState, useContext, useEffect } from 'react'
 import { TaskListContext } from '../contexts/TaskListContext'
 
 const TaskForm = () => {
-  const { addTask, clearList, editTask, editItem } = useContext(TaskListContext)
-  const [title, setTitle] = useState('')
+  const { addTask, editTask, editItem } = useContext(TaskListContext)
+  const [phone, setPhone] = useState('')
 
   const handleSubmit = e => {
     e.preventDefault()
     if (!editItem) {
-      addTask(title)
-      setTitle('')
+      addTask(phone)
+      setPhone('')
     } else {
-      editTask(title, editItem.id)
+      editTask(phone, editItem.id)
     }
   }
 
   const handleChange = e => {
-    setTitle(e.target.value)
+    setPhone(e.target.value)
+  }
+
+  const handleClear = e => {
+    e.preventDefault()
+    setPhone('')
   }
 
   useEffect(() => {
     if (editItem) {
-      setTitle(editItem.title)
+      setPhone(editItem.phone)
       console.log(editItem)
     } else {
-      setTitle('')
+      setPhone('')
     }
   }, [editItem])
 
@@ -32,8 +37,9 @@ const TaskForm = () => {
     <form onSubmit={handleSubmit} className="form">
       <input
         type="text"
-        placeholder="Add Contact..."
-        value={title}
+        pattern="[8][0-9]{10}"
+        placeholder="Add Contact (85607766002)"
+        value={phone}
         onChange={handleChange}
         required
         className="task-input"
@@ -42,7 +48,7 @@ const TaskForm = () => {
         <button type="submit" className="btn add-task-btn">
           {editItem ? 'Edit' : 'Add'}
         </button>
-        <button className="btn clear-btn" onClick={clearList}>
+        <button className="btn clear-btn" onClick={handleClear}>
           Clear
         </button>
       </div>
