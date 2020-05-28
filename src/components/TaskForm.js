@@ -37,7 +37,7 @@ const TaskForm = () => {
     <form onSubmit={handleSubmit} className="form">
       <input
         type="text"
-        pattern="[8][0-9]{10}"
+        pattern="[8][0-9]{1,15}"
         placeholder="Add Contact (85607766002)"
         value={phone}
         onChange={handleChange}
